@@ -9,9 +9,12 @@ const LoginPage = () => {
   const navigate = useNavigate()
   const { login } = useContext(AuthContext)
 
+  // 環境変数からAPIのベースURLを取得（デフォルトはローカル）
+  const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000/api"
+
   const handleLogin = async (formData) => {
     try {
-      const response = await axios.post("http://localhost:4000/api/login", formData)
+      const response = await axios.post(`${baseURL}/login`, formData)
       const { token } = response.data
 
       login(token) // ← ここがポイント！

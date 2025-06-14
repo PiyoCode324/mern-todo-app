@@ -16,6 +16,9 @@ function TodoPage() {
 
   const token = localStorage.getItem('token')
 
+  // APIベースURLを環境変数から取得（無ければローカルにフォールバック）
+  const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000/api"
+
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark)
   }, [isDark])
@@ -24,7 +27,7 @@ function TodoPage() {
     setLoading(true)
     setError(null)
 
-    fetch('http://localhost:4000/api/todos', {
+    fetch(`${baseURL}/todos`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       }
@@ -41,7 +44,7 @@ function TodoPage() {
         setError(err)
         setLoading(false)
       })
-  }, [token])
+  }, [token, baseURL])
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -52,7 +55,7 @@ function TodoPage() {
   }, [])
 
   const addTodo = (text, category, deadline) => {
-    fetch('http://localhost:4000/api/todos', {
+    fetch(`${baseURL}/todos`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +75,7 @@ function TodoPage() {
   }
 
   const deleteTodo = (id) => {
-    fetch(`http://localhost:4000/api/todos/${id}`, {
+    fetch(`${baseURL}/todos/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -89,7 +92,7 @@ function TodoPage() {
     const target = todos.find(todo => todo._id === id)
     if (!target) return
 
-    fetch(`http://localhost:4000/api/todos/${id}`, {
+    fetch(`${baseURL}/todos/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
