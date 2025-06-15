@@ -3,7 +3,7 @@
 import Todo from '../models/todoModel.js'; // require を import に変更し、相対パスに .js 拡張子を追加
 
 // 一覧取得
-export const getTodos = async (req, res) => { // exports.getTodos を export const getTodos に変更
+export const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find().sort({ createdAt: -1 });
     res.json(todos);
@@ -13,7 +13,7 @@ export const getTodos = async (req, res) => { // exports.getTodos を export con
 };
 
 // 追加
-export const createTodo = async (req, res) => { // exports.createTodo を export const createTodo に変更
+export const createTodo = async (req, res) => {
   try {
     const { text, category, deadline } = req.body;
     const newTodo = new Todo({ 
@@ -29,7 +29,8 @@ export const createTodo = async (req, res) => { // exports.createTodo を export
 };
 
 // 削除
-export const deleteTodo = async (req, res) => { // exports.deleteTodo を export const deleteTodo に変更
+export const deleteTodo = async (req, res) => {
+  console.log('DELETE /api/todos/:id called, id=', req.params.id);
   try {
     await Todo.findByIdAndDelete(req.params.id);
     res.status(204).end();
@@ -39,7 +40,8 @@ export const deleteTodo = async (req, res) => { // exports.deleteTodo を export
 };
 
 // 完了状態更新＋カテゴリ更新にも対応
-export const updateTodo = async (req, res) => { // exports.updateTodo を export const updateTodo に変更
+export const updateTodo = async (req, res) => {
+  console.log('PUT /api/todos/:id called, id=', req.params.id);
   try {
     const { completed, category } = req.body;
     const updateData = {};
