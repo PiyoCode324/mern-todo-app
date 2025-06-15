@@ -1,6 +1,6 @@
 // server/models/User.js
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'; // require を import に変更
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -16,4 +16,4 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema); // module.exports を export default に変更

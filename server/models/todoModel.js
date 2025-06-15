@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// server/models/todoModel.js
+
+import mongoose from 'mongoose'; // require を import に変更
 
 const todoSchema = new mongoose.Schema({
   text: { type: String, required: true },
@@ -7,4 +9,4 @@ const todoSchema = new mongoose.Schema({
   deadline: { type: Date, default: null } // ✅ ここを追加！
 }, { timestamps: true });
 
-module.exports = mongoose.model('Todo', todoSchema);
+export default mongoose.model('Todo', todoSchema); // module.exports を export default に変更

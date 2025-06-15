@@ -1,9 +1,9 @@
 // server/routes/auth.js
 
-const express = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import express from 'express'; // CommonJSの require を ESMの import に変更
+import bcrypt from 'bcrypt';   // CommonJSの require を ESMの import に変更
+import jwt from 'jsonwebtoken'; // CommonJSの require を ESMの import に変更
+import User from '../models/User.js'; // CommonJSの require を ESMの import に変更し、相対パスには .js 拡張子が必要
 
 const router = express.Router();
 
@@ -70,4 +70,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router; // CommonJSの module.exports を ESMの export default に変更

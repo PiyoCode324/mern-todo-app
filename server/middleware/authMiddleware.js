@@ -1,6 +1,6 @@
 // server/middleware/authMiddleware.js
 
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken'; // require を import に変更
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -24,4 +24,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware; // module.exports を export default に変更
