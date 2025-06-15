@@ -1,11 +1,13 @@
 {
   "name": "my-todo-app",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-  "start": "concurrently --names \"SERVER,CLIENT\" -c \"cyan,magenta\" \"npm run server\" \"npm run client\"",
-  "server": "nodemon server/index.js",
-  "client": "npm run dev --prefix client"
-},
+    "start": "node server/index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"", 
+    "server": "nodemon server/index.js",
+    "client": "npm run dev --prefix client"
+  },
   "devDependencies": {
     "concurrently": "^8.0.0",
     "nodemon": "^3.0.0"
